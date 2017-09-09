@@ -5,7 +5,8 @@ import App from '../components/app/App';
 import * as Actions from '../actions/actionCreators';
 
 const mapStateToProps = state => ({
-  cartItems: state.cartItems
+  cartItems: state.cartItems,
+  selectedTabIndex: state.selectedTabIndex
 });
 
 function mapDispatchToProps(dispatch) {

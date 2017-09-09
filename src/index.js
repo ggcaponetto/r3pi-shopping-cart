@@ -1,13 +1,15 @@
+/* eslint-env node, browser */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import ShopContainer from './containers/ShopContainer';
-import registerServiceWorker from './registerServiceWorker';
-
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+
+import './index.css';
+import ShopContainer from './containers/ShopContainer';
+import registerServiceWorker from './registerServiceWorker';
 import shopApp from './reducers';
 
 const initStore = (preloadedState = {}) => {
@@ -21,7 +23,7 @@ const initStore = (preloadedState = {}) => {
   return store;
 };
 
-let store = initStore();
+const store = initStore();
 
 const mainComponent = (
   <Provider store={store}>
