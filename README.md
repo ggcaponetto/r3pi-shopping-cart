@@ -5,11 +5,11 @@ Docs, unit, integration and e2e tests have been intentionally skipped.
 This app has been deployed to heroku: https://pacific-cove-29069.herokuapp.com/
 
 # Instructions to run this app in development mode
-- npm run install (or yarn install)
+- npm install (or yarn install)
 - npm run r-start
 
 # Instructions to run this app in production mode
-- npm run install (or yarn install)
+- npm install (or yarn install)
 - npm run r-build
 - npm run start
 
