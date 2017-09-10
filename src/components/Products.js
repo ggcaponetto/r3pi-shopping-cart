@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import log from '../util/logger';
 
 
-const Product = ({ name, price }) => (
-  <div>
-    {name}, CHF {price}
+export const Product = ({ name, price, onClick }) => (
+  <div style={{ flex: 1 }}>
+    <button
+      style={{ flex: 1 }}
+      onClick={onClick}
+    >
+      {name}, CHF {price}
+    </button>
   </div>
 );
 
@@ -24,12 +29,20 @@ class Products extends Component {
   }
   getProductList() {
     const products = [];
-    this.props.products.forEach((p) => {
+    this.props.products.forEach((p, i) => {
       products.push(
         <Product
+          key={JSON.stringify({ p, i })}
           name={p.name}
           price={p.price}
           rules={p.rules}
+          onClick={() => {
+            log(`${Products.NAME} onClick`, { product: p });
+            const itemsInBasket = this.props.cartItems;
+            // add the clicked product to the basket
+            const updatedBacketItems = itemsInBasket.concat([p]);
+            this.props.updateCartItems(updatedBacketItems);
+          }}
         />
       );
     });
@@ -40,11 +53,10 @@ class Products extends Component {
       <div className="shop">
         <div
           style={{
-            display: 'flex',
-            backgroundColor: 'blue'
+            display: 'flex'
           }}
         >
-          <div>
+          <div style={{ flex: 1 }}>
             {this.getProductList()}
           </div>
         </div>
@@ -56,15 +68,21 @@ class Products extends Component {
 Product.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  rules: PropTypes.array
+  rules: PropTypes.array,
+  onClick: PropTypes.func
 };
 
 Product.defaultProps = {
-  rules: []
+  rules: [],
+  onClick: () => {}
 };
 
 Products.propTypes = {
-  products: PropTypes.array.isRequired
+  products: PropTypes.array.isRequired,
+  cartItems: PropTypes.array.isRequired,
+  selectedTabIndex: PropTypes.number.isRequired,
+  updateTabIndex: PropTypes.func.isRequired,
+  updateCartItems: PropTypes.func.isRequired
 };
 
 export default Products;

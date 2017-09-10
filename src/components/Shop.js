@@ -45,11 +45,11 @@ class Shop extends Component {
   getComponentToDisplay() {
     switch (this.props.selectedTabIndex) {
       case 0:
-        return <Products products={products} />;
+        return <Products products={products} {...this.props} />;
       case 1:
-        return <Basket />;
+        return <Basket {...this.props} />;
       case 2:
-        return <Checkout />;
+        return <Checkout {...this.props} />;
       default:
         throw new Error(`Could not determine which react component
                         to display for tabIndex ${this.props.selectedTabIndex}`);
@@ -64,8 +64,7 @@ class Shop extends Component {
       <div className="shop">
         <div
           style={{
-            display: 'flex',
-            backgroundColor: 'red'
+            display: 'flex'
           }}
         >
           <button
@@ -81,7 +80,7 @@ class Shop extends Component {
             onClick={() => { this.selectTab(1); }}
           >
             <div>
-              Basket
+              Basket ({this.props.cartItems.length} items)
             </div>
           </button>
           <button
@@ -103,7 +102,8 @@ class Shop extends Component {
 
 Shop.propTypes = {
   selectedTabIndex: PropTypes.number.isRequired,
-  updateTabIndex: PropTypes.func.isRequired
+  updateTabIndex: PropTypes.func.isRequired,
+  cartItems: PropTypes.array.isRequired
 };
 
 export default Shop;
