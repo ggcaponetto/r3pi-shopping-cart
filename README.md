@@ -1,3 +1,18 @@
+Javascript assestment test for R3PI by Giuseppe Giulio Caponetto
+
+Used libraries and technologies: ES6, express, redux, react, css.
+Docs, unit, integration and e2e tests have been intentionally skipped.
+This app has been deployed to heroku: https://pacific-cove-29069.herokuapp.com/
+
+# Instructions to run this app in development mode
+- npm run install (or yarn install)
+- npm run r-start
+
+# Instructions to run this app in production mode
+- npm run install (or yarn install)
+- npm run r-build
+- npm run start
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -9,10 +24,11 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Sending Feedback](#sending-feedback)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
-  - [npm start](#npm-start)
-  - [npm test](#npm-test)
-  - [npm run build](#npm-run-build)
-  - [npm run eject](#npm-run-eject)
+  - [npm start](#npm-start-prod)
+  - [npm r-start](#npm-r-start)
+  - [npm r-test](#npm-r-test)
+  - [npm run r-build](#npm-run-r-build)
+  - [npm run r-eject](#npm-run-r-eject)
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
 - [Syntax Highlighting in the Editor](#syntax-highlighting-in-the-editor)
 - [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
@@ -159,18 +175,23 @@ In the project directory, you can run:
 
 ### `npm start`
 
+Runs the app in production mode. Uses express to serve static bundled files.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### `npm r-start`
+
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm r-test`
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](#running-tests) for more information.
 
-### `npm run build`
+### `npm run r-build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -180,7 +201,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](#deployment) for more information.
 
-### `npm run eject`
+### `npm run r-eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
@@ -283,7 +304,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1769,7 +1790,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
