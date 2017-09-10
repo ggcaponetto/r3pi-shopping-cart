@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import log from '../util/logger';
 import { groupBy } from './Checkout';
 
+export const LIGHT_RED = '#ffc1c1';
+
 class Basket extends Component {
   static get NAME() {
     return 'Basket';
@@ -21,10 +23,9 @@ class Basket extends Component {
     log(`${Basket.NAME} componentWillReceiveProps`, { props: this.props, nextProps });
   }
   getBasketControls() {
-    const items = this.props.cartItems;
+    const items = [].concat(this.props.cartItems);
     // if there are no items in the basket do not display controls.
     if (items.length === 0) return null;
-
     items.sort((p1, p2) => p1.name >= p2.name);
     const groupedItems = groupBy(items, 'name');
     const backetActions = [];
@@ -36,6 +37,7 @@ class Basket extends Component {
           style={{ display: 'flex', flex: 1 }}
         >
           <button
+            className="button-warning pure-button"
             style={{ flex: 1 }}
             onClick={() => {
               const itemsInBasket = [].concat(this.props.cartItems);
@@ -44,7 +46,7 @@ class Basket extends Component {
               this.props.updateCartItems(filteredItems);
             }}
           >
-            Remove {group.length} x {key}
+            remove {group.length} x {key}
           </button>
         </div>
       );
@@ -55,13 +57,14 @@ class Basket extends Component {
         style={{ display: 'flex', flex: 1 }}
       >
         <button
+          className="button-error pure-button"
           style={{ flex: 1 }}
           onClick={() => {
             // remove all products
             this.props.updateCartItems([]);
           }}
         >
-          Remove all
+          remove all
         </button>
       </div>
     );
@@ -69,21 +72,25 @@ class Basket extends Component {
   }
   getCartItems() {
     const products = [];
-    this.props.cartItems.forEach((p, i) => {
+    const items = [].concat(this.props.cartItems);
+    items.forEach((p, i) => {
       products.push(
         <div
           key={JSON.stringify({ p, i })}
           style={{ flex: 1 }}
         >
           <div style={{ display: 'flex' }}>
-            <div style={{ flex: 10 }}>
-              {p.name}, {p.price} CHF
+            <div style={{ flex: 10, alignItems: 'center', justifyContent: 'center' }}>
+              <p>
+                {p.name}, {p.price} CHF
+              </p>
             </div>
             <button
+              className="button-warning pure-button"
               style={{ flex: 1 }}
               onClick={() => {
                 log(`${Basket.NAME} onClick`, { product: p });
-                const itemsInBasket = [].concat(this.props.cartItems);
+                const itemsInBasket = [].concat(items);
                 // remove the clicked product from the basket
                 const indexToRemove =
                   itemsInBasket.findIndex(product => product.name === p.name);
@@ -117,7 +124,7 @@ class Basket extends Component {
           style={{}}
         >
           <div
-            style={{ display: 'flex' }}
+            style={{ display: 'flex', flexWrap: 'wrap' }}
           >
             {this.getBasketControls()}
           </div>

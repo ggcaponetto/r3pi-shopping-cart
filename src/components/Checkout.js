@@ -54,6 +54,24 @@ class Checkout extends Component {
 
     let total = 0;
     const billRows = [];
+    billRows.push(
+      <div
+        key={JSON.stringify({ heading: true })}
+      >
+        <div>
+          <h4>Billing info</h4>
+        </div>
+        <div
+          style={{
+            flex: 1,
+            height: '2px',
+            backgroundColor: 'black',
+            marginTop: 10,
+            marginBottom: 10
+          }}
+        />
+      </div>
+    );
     Object.keys(groupedItems).forEach((key, i) => {
       const group = groupedItems[key];
       log(`${Checkout.NAME} generating billing info for group`, { group });
@@ -87,21 +105,42 @@ class Checkout extends Component {
       billRows.push(
         <div
           key={JSON.stringify({ group, i, subTotal: true })}
-          style={{ flex: 1 }}
+          style={{ display: 'flex', flex: 1 }}
           className="subTotal"
         >
-          Subtotal: {subTotal}
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            {group[0].name} subtotal: {subTotal.toFixed(2)} CHF
+          </div>
         </div>
       );
       total += subTotal;
     });
     billRows.push(
       <div
+        key={JSON.stringify({ spacer: true })}
+        style={{
+          flex: 1,
+          height: '2px',
+          backgroundColor: 'black',
+          marginTop: 10,
+          marginBottom: 10
+        }}
+      />
+    );
+    billRows.push(
+      <div
         key={JSON.stringify({ total: true })}
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          textAlign: 'right'
+        }}
         className="total"
       >
-        Total: {total} CHF
+        <div
+          style={{ margin: 10, fontWeight: 'bold', fontSize: '18px' }}
+        >
+          Total: {total.toFixed(2)} CHF
+        </div>
       </div>
     );
     return billRows;
@@ -114,7 +153,7 @@ class Checkout extends Component {
             display: 'flex'
           }}
         >
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, margin: 20 }}>
             {this.getBillingInfo()}
           </div>
         </div>

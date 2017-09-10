@@ -6,6 +6,8 @@ import Products from './Products';
 import Basket from './Basket';
 import Checkout from './Checkout';
 
+export const LIGHT_ORANGE = '#fff5cd';
+
 const products = [
   {
     name: 'Apple',
@@ -63,12 +65,17 @@ class Shop extends Component {
     return (
       <div className="shop">
         <div
+          className="pure-button-group"
+          role="group"
           style={{
             display: 'flex'
           }}
         >
           <button
-            style={{ flex: 1 }}
+            className={`pure-button ${this.props.selectedTabIndex === 0 ? 'pure-button-active' : ''}`}
+            style={{
+              flex: 1
+            }}
             onClick={() => { this.selectTab(0); }}
           >
             <div>
@@ -76,7 +83,10 @@ class Shop extends Component {
             </div>
           </button>
           <button
-            style={{ flex: 1 }}
+            className={`pure-button ${this.props.selectedTabIndex === 1 ? 'pure-button-active' : ''}`}
+            style={{
+              flex: 1
+            }}
             onClick={() => { this.selectTab(1); }}
           >
             <div>
@@ -84,7 +94,10 @@ class Shop extends Component {
             </div>
           </button>
           <button
-            style={{ flex: 1 }}
+            className={`pure-button ${this.props.selectedTabIndex === 2 ? 'pure-button-active' : ''}`}
+            style={{
+              flex: 1
+            }}
             onClick={() => { this.selectTab(2); }}
           >
             <div>

@@ -4,13 +4,23 @@ import log from '../util/logger';
 
 
 export const Product = ({ name, price, onClick }) => (
-  <div style={{ flex: 1 }}>
-    <button
-      style={{ flex: 1 }}
-      onClick={onClick}
-    >
-      {name}, CHF {price}
-    </button>
+  <div
+    style={{ display: 'flex', flex: 1 }}
+  >
+    <div style={{ display: 'flex', flex: 1 }}>
+      <div style={{ flex: 10, alignItems: 'center', justifyContent: 'center' }}>
+        <p>
+          {name}, {price} CHF
+        </p>
+      </div>
+      <button
+        className="button-secondary pure-button"
+        style={{ flex: 1 }}
+        onClick={onClick}
+      >
+        add to basket
+      </button>
+    </div>
   </div>
 );
 
